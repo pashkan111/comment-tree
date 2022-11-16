@@ -1,3 +1,4 @@
+import pprint
 from dataclasses import dataclass, field
 from typing import Optional, List, Dict
 
@@ -43,6 +44,7 @@ def get_root_by_id(root: List[Comment], id: int) -> Optional[dict]:
 
 
 def find_orphans(comments: List[Comment], comments_tree: Tree = Tree()) -> Tree:
+    """Build comment tree"""
     data = comments_tree.data
     childs = []
     for comment in comments:
@@ -60,16 +62,7 @@ def find_orphans(comments: List[Comment], comments_tree: Tree = Tree()) -> Tree:
             childs.append(comment)
     if len(childs) != 0:
         data = find_orphans(childs, data)
-    return comments_tree
-
-
-def show_comments(comments_tree: Tree) -> str:
-    data = comments_tree.data
-    if len(data) == 0:
-        return ''
-    # for comment in data:
+    return comments_tree  
         
-    
-            
-import pprint
+           
 pprint.pprint(find_orphans(comments), indent=4)
